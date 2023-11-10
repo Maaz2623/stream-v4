@@ -23,7 +23,7 @@ const Home = () => {
   }
 
   return (
-    <div className="h-[fit-content] w-full">
+    <div className="h-[fit-content] w-full mb-40">
       <div className="text-center flex justify-center items-center h-20 w-full mt-2">
         <p className="text-xl sm:text-3xl font-semibold">Recently added</p>
       </div>
