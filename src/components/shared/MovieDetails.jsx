@@ -13,7 +13,7 @@ const MovieDetails = ({
   quality,
 }) => {
   return (
-    <div className=" bg-dark-2 border border-primary-500 text-white p-10 mx-10 my-5 lg:flex-start gap-10 rounded-lg">
+    <div className="mx-1 bg-dark-2 border border-primary-500 text-white p-10 lg:mx-10 my-5 lg:flex-start gap-10 rounded-lg">
       <div className="h-auto flex-center overflow-hidden w-full lg:w-[230px]">
         <img
           src={poster}

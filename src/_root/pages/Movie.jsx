@@ -32,7 +32,7 @@ const Movie = () => {
   
 
   return (
-    <div className="h-auto flex flex-col w-full p-1">
+    <div className="h-auto flex flex-col w-full p-1 mb-20">
       {Object.keys(movie).length === 0 ? (
         <div className="flex justify-center items-center">
           <Loader />
