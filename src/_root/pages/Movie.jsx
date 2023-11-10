@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchSingleMovie } from "@/lib/appwrite";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
+import MovieDetails from "@/components/shared/MovieDetails";
 
 const Movie = () => {
   const [movie, setMovie] = useState({});
@@ -48,40 +49,28 @@ const Movie = () => {
               )}
             </Button>
           </div>
-          <div className="sm:m-1  h-[500px] flex justify-center items-center">
+
+
+          <div className="h-[350px] mb-4 sm:m-1  sm:h-[500px] flex justify-center items-center">
             <iframe
               src={movie.embedUrl}
               frameborder="0"
-              className="h-1/2 mt-1 sm:h-full w-full rounded-md self-start border border-primary-500"
+              className="h-full mt-1 sm:h-full w-full rounded-md self-start border border-primary-500"
             ></iframe>
           </div>
 
-          <div className=" bg-dark-2 border border-primary-500 text-white p-10 mx-10 my-5 flex gap-10 rounded-lg">
-            <div className="h-auto overflow-hidden w-[230px]">
-              <img
-                src={movie.poster}
-                className="h-80 rounded-md w-full duration-300 shadow-xl"
-              />
-            </div>
-            <div className="flex-1">
-              <p className="text-2xl font-medium mb-2">{movie.title}</p>
-              <div className="flex justify-start items-center gap-4 mt-4">
-                <p className="border-2 border-white text-sm w-[fit-content] rounded-md cursor-pointer text-white p-2">
-                  {movie.quality === "1080p" ? "HD" : "-"}
-                </p>
-                <p className="text-yellow-500 cursor-pointer font-semibold border-yellow-500 rounded-md border-2 w-[fit-content] text-sm p-2">
-                  IMDB: {movie.rating}
-                </p>
-              </div>
-              <div className="flex-col flex-wrap mt-5">
-                <p className="text-md">{movie.plot}</p>
-                <p className="mt-5">Genre : {movie.genre}</p>
-                <p className="mt-5">Cast : {movie.cast}</p>
-                <p className="mt-5">Released : {movie.releaseDate}</p>
-                <p className="mt-5">Director : {movie.director}</p>
-              </div>
-            </div>
-          </div>
+          <MovieDetails
+            title={movie.title}
+            poster={movie.poster}
+            plot={movie.plot}
+            genre={movie.genre}
+            cast={movie.cast}
+            releaseDate={movie.releaseDate}
+            director={movie.director}
+            rating={movie.rating}
+            quality={movie.quality}
+          />
+
         </>
       )}
     </div>

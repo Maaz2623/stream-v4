@@ -12,7 +12,6 @@ const Home = () => {
   const getMovies = async () => {
     try {
       const moviesData = (await fetchMovies()).documents.reverse();
-      console.log(moviesData);
       setMovies(moviesData);
     } catch (error) {
       console.log(error);
@@ -37,6 +36,7 @@ const Home = () => {
           {movies.map((movie) => {
             return (
               <Postcard
+              key={movie.$id}
                 poster={movie.poster}
                 slug={movie.slug}
                 title={movie.title}

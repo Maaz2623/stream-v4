@@ -2,7 +2,7 @@ import React from 'react'
 
 const Suggest = () => {
   return (
-    <div>Suggest</div>
+    <div>This Feature Will Be Available Soon!!!</div>
   )
 }
 

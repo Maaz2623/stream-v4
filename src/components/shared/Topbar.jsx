@@ -11,7 +11,7 @@ const Topbar = () => {
             alt="logo"
             width={30}
             height={30}
-          /><p className='w-full flex justify-start text-2xl font-semibold items-center'></p>
+          /><p className='w-full flex justify-start text-2xl font-semibold items-center'>Stream</p>
         </Link>
 
         <div className="flex gap-4">
