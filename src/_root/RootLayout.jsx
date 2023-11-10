@@ -18,7 +18,7 @@ import {
 
 const RootLayout = () => {
 
-  const [landed, setLanded] = useState(true);
+  const [landed, setLanded] = useState(false);
 
   return (
     <>
