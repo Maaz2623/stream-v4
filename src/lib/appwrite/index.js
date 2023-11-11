@@ -30,3 +30,60 @@ export const fetchSingleMovie = async (slug) => {
         console.log(error)
     }
 }
+
+
+// export const saveUnsaveMovie = async (isSaved, id) => {
+//     try {
+//         if(isSaved==false || isSaved==null){
+//             await databases.updateDocument(database_id, collection_id, id, {
+//                 "isSaved": true
+//             })
+//             console.log("Saved")
+//         }
+//         if(isSaved==true) {
+//             await databases.updateDocument(database_id, collection_id, id, {
+//                 "isSaved": false
+//             })
+//             console.log("Unsaved")
+//         }
+//         console.log("Updated");
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+
+export const saveMovie = async (id) => {
+    try {
+        const res = await databases.updateDocument(database_id, collection_id, id, {
+            "isSaved": true
+        })
+        console.log("Saved")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const unsaveMovie = async (id) => {
+    try {
+        const res = await databases.updateDocument(database_id, collection_id, id, {
+            "isSaved": false
+        })
+        console.log("Unsaved")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const fetchSaved = async () => {
+    try {
+        const res = await databases.listDocuments(database_id, collection_id, [
+            Query.equal('isSaved', true)
+        ])
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
