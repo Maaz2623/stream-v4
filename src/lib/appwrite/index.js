@@ -89,9 +89,6 @@ export const searchMovie = async (query) => {
     const res = await databases.listDocuments(database_id, collection_id, [
       Query.startsWith('title', query),
     ]);
-    if(res.documents.length===0){
-        return fetchMovies()
-    }
     return res.documents.reverse();
   } catch (error) {
     console.log(error);

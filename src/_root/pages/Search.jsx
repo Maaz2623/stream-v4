@@ -12,9 +12,6 @@ const Search = () => {
     try {
       const res = await searchMovie(query);
       setSearchList(res);
-      if (res.length === 0) {
-        alert("not found");
-      }
       console.log(res);
     } catch(error) {
       console.log("Unknown error")
