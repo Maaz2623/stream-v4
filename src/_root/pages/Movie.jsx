@@ -4,6 +4,17 @@ import { fetchSingleMovie, saveMovie, unsaveMovie } from "@/lib/appwrite";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import MovieDetails from "@/components/shared/MovieDetails";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const Movie = () => {
   const [movie, setMovie] = useState({});
@@ -55,22 +66,44 @@ const Movie = () => {
         <>
           <div className="bg-dark-2 shadow-xl h-20 font-semibold border border-primary-500 items-center flex-between px-5 m-1 rounded-md sm:text-lg">
             <p>{movie.title}</p>
-            <Button
-              onClick={movie.isSaved === true ? unsave : save}
-              className=""
-            >
-              {movie.isSaved === true ? (
-                <div className="flex justify-center items-center gap-1">
-                  <img src="/assets/icons/saved.svg" className="h-6" alt="" />
-                  Unsave
-                </div>
-              ) : (
-                <div className="flex justify-center items-center gap-1">
-                  <img src="/assets/icons/save.svg" className="h-6" alt="" />
-                  Save
-                </div>
-              )}
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button
+                  onClick={movie.isSaved === true ? unsave : save}
+                  className=""
+                >
+                  {movie.isSaved === true ? (
+                    <div className="flex justify-center items-center gap-1">
+                      <img
+                        src="/assets/icons/saved.svg"
+                        className="h-6"
+                        alt=""
+                      />
+                      Unsave
+                    </div>
+                  ) : (
+                    <div className="flex justify-center items-center gap-1">
+                      <img
+                        src="/assets/icons/save.svg"
+                        className="h-6"
+                        alt=""
+                      />
+                      Save
+                    </div>
+                  )}
+                </Button>
+              </AlertDialogTrigger>
+
+              <AlertDialogContent className="bg-dark-2 border border-primary-500">
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Added to saved collection</AlertDialogTitle>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="border border-primary-500" onClick={movie.isSaved === true ? unsave : save}>Cancel</AlertDialogCancel>
+                  <AlertDialogAction className="bg-primary-500  ">Okay</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
 
           <div className="h-[350px] mb-4 sm:m-1  sm:h-[500px] flex justify-center items-center">
