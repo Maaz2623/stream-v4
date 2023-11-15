@@ -96,7 +96,7 @@ const Movie = () => {
 
               <AlertDialogContent className="bg-dark-2 border border-primary-500">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Added to saved collection</AlertDialogTitle>
+                  <AlertDialogTitle>{"Successful"}</AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel className="border border-primary-500" onClick={movie.isSaved === true ? unsave : save}>Cancel</AlertDialogCancel>
