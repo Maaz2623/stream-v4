@@ -99,8 +99,15 @@ const Movie = () => {
                   <AlertDialogTitle>{"Successful"}</AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel className="border border-primary-500" onClick={movie.isSaved === true ? unsave : save}>Cancel</AlertDialogCancel>
-                  <AlertDialogAction className="bg-primary-500  ">Okay</AlertDialogAction>
+                  <AlertDialogCancel
+                    className="border border-primary-500"
+                    onClick={movie.isSaved === true ? unsave : save}
+                  >
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction className="bg-primary-500  ">
+                    Okay
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -108,9 +115,11 @@ const Movie = () => {
 
           <div className="h-[350px] mb-4 sm:m-1  sm:h-[500px] flex justify-center items-center">
             <iframe
-              src={movie.embedUrl}
-              frameBorder="0"
               className="h-full mt-1 sm:h-full w-full rounded-md self-start border border-primary-500"
+              src={`${movie.embedUrl}?rel=0`}
+              title={movie.title}
+              frameBorder="0"
+              allowfullscreen
             ></iframe>
           </div>
 
