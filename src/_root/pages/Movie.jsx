@@ -119,7 +119,8 @@ const Movie = () => {
               src={movie.embedUrl}
               title={movie.title}
               frameBorder="0"
-              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
             ></iframe>
           </div>
 
