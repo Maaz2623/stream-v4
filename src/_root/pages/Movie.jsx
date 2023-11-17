@@ -116,7 +116,7 @@ const Movie = () => {
           <div className="h-[350px] mb-4 sm:m-1  sm:h-[500px] flex justify-center items-center">
             <iframe
               className="h-full mt-1 sm:h-full w-full rounded-md self-start border border-primary-500"
-              src={`${movie.embedUrl}?rel=0`}
+              src={movie.embedUrl}
               title={movie.title}
               frameBorder="0"
               allowfullscreen
