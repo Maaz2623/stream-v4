@@ -83,7 +83,11 @@ export const fetchSaved = async () => {
     const res = await databases.listDocuments(database_id, collection_id, [
       Query.equal("isSaved", true),
     ]);
-    return res;
+    const imdbIds = res.documents.map(document => document.imdbId);
+    return {
+      res: res.documents,
+      imdbIds: imdbIds
+    };
   } catch (error) {
     console.log(error);
   }

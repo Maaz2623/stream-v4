@@ -2,14 +2,32 @@ import React, { useEffect, useState } from "react";
 import { fetchSaved } from "@/lib/appwrite";
 import Postcard from "@/components/shared/Postcard";
 import Loader from "@/components/shared/Loader";
+import axios from 'axios'
 
 const Saved = () => {
   const [movies, setMovies] = useState([])
 
   const fetchData = async () => {
     try {
-      const moviesData = (await fetchSaved()).documents.reverse();
-      setMovies(moviesData)
+      const moviesData = await fetchSaved();
+      const imdbData = await Promise.all(
+        moviesData.imdbIds.map(async (movie) => {
+          const movieData = await axios.get(
+            `https://www.omdbapi.com/?i=${movie}&apikey=2b377e16`
+          );
+          return { title: movieData.data.Title, poster: movieData.data.Poster };
+        })
+      );
+
+      // Use map to create a new array with updated movie objects
+      const defaultMovies = moviesData.res.map((movie, index) => {
+        return {
+          ...movie,
+          title: imdbData[index].title,
+          poster: imdbData[index].poster,
+        };
+      });
+      setMovies(defaultMovies)
     } catch (error) {
       console.log(error);
     }
