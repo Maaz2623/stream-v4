@@ -16,7 +16,7 @@ const Home = () => {
       const imdbData = await Promise.all(
         moviesData.imdbIds.map(async (movie) => {
           const movieData = await axios.get(
-            `http://www.omdbapi.com/?i=${movie}&apikey=2b377e16`
+            `https://www.omdbapi.com/?i=${movie}&apikey=2b377e16`
           );
           return { title: movieData.data.Title, poster: movieData.data.Poster };
         })

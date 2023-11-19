@@ -41,7 +41,7 @@ const Movie = () => {
       const movieData = await fetchSingleMovie(slug);
       const imdbData = await (
         await axios.get(
-          `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=2b377e16`
+          `https://www.omdbapi.com/?i=${movie.imdbId}&apikey=2b377e16`
         )
       ).data;
       setImdbData({
