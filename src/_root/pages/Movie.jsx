@@ -15,9 +15,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import axios from "axios";
 
 const Movie = () => {
   const [movie, setMovie] = useState({});
+
+  const [imdbData, setImdbData] = useState({
+    title: "",
+    poster: "",
+    plot: "",
+    genre: "",
+    cast: "",
+    releaseDate: "",
+    director: "",
+    rating: "",
+    quality: "",
+  });
 
   const [saved, setSaved] = useState(movie.$id);
 
@@ -26,7 +39,23 @@ const Movie = () => {
   const getMovie = async () => {
     try {
       const movieData = await fetchSingleMovie(slug);
+      const imdbData = await (
+        await axios.get(
+          `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=2b377e16`
+        )
+      ).data;
+      setImdbData({
+        title: imdbData.Title,
+        poster: imdbData.Poster,
+        plot: imdbData.Plot,
+        genre: imdbData.Genre,
+        cast: imdbData.Actors,
+        releaseDate: imdbData.Released,
+        director: imdbData.Director,
+        rating: imdbData.imdbRating,
+      });
       setMovie(movieData);
+      return imdbData
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +94,7 @@ const Movie = () => {
       ) : (
         <>
           <div className="bg-dark-2 shadow-xl h-20 font-semibold border border-primary-500 items-center flex-between px-5 m-1 rounded-md sm:text-lg">
-            <p>{movie.title}</p>
+            <p>{imdbData.title}</p>
             <AlertDialog>
               <AlertDialogTrigger>
                 <Button
@@ -125,14 +154,14 @@ const Movie = () => {
           </div>
 
           <MovieDetails
-            title={movie.title}
-            poster={movie.poster}
-            plot={movie.plot}
-            genre={movie.genre}
-            cast={movie.cast}
-            releaseDate={movie.releaseDate}
-            director={movie.director}
-            rating={movie.rating}
+            title={imdbData.title}
+            poster={imdbData.poster}
+            plot={imdbData.plot}
+            genre={imdbData.genre}
+            cast={imdbData.cast}
+            releaseDate={imdbData.releaseDate}
+            director={imdbData.director}
+            rating={imdbData.rating}
             quality={movie.quality}
           />
         </>

@@ -1,5 +1,7 @@
 import { Client, Databases, Query, ID } from "appwrite";
 
+const omdb_api = "http://www.omdbapi.com/?apikey=2b377e16"
+
 const database_id = "654cdcd49f39b234f2c1";
 const collection_id = "654cdd07019f058107b5";
 const suggestion_collection_id = '6554e5413b11cf41dc8a'
@@ -13,8 +15,11 @@ const databases = new Databases(client);
 export const fetchMovies = async () => {
   try {
     const res = await databases.listDocuments(database_id, collection_id);
-    console.log(res);
-    return res;
+    const imdbIds = res.documents.map(document => document.imdbId);
+    return {
+      res: res.documents,
+      imdbIds: imdbIds
+    };
   } catch (error) {
     console.log(error);
   }
@@ -118,3 +123,5 @@ export const getSuggestions = async () => {
     console.log(error)
   }
 }
+
+
