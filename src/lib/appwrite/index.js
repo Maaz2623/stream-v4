@@ -16,6 +16,7 @@ export const fetchMovies = async () => {
   try {
     const res = await databases.listDocuments(database_id, collection_id);
     const imdbIds = res.documents.map(document => document.imdbId);
+    console.log(res)
     return {
       res: res.documents,
       imdbIds: imdbIds
@@ -95,10 +96,7 @@ export const fetchSaved = async () => {
 
 export const searchMovie = async (query) => {
   try {
-    const res = await databases.listDocuments(database_id, collection_id, [
-      Query.startsWith('title', query),
-    ]);
-    return res.documents.reverse();
+    const res = await fetchMovies()
   } catch (error) {
     console.log(error);
   }

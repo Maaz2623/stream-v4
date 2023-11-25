@@ -1,7 +1,8 @@
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
-import { searchMovie } from "@/lib/appwrite";
+import { fetchMovies, searchMovie } from "@/lib/appwrite";
 import Postcard from "@/components/shared/Postcard";
+import axios from 'axios'
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -10,11 +11,26 @@ const Search = () => {
 
   const search = async () => {
     try {
-      const res = await searchMovie(query);
-      setSearchList(res);
-      console.log(res);
+      const allMovies = await fetchMovies()
+      const imdbData = await Promise.all(
+        moviesData.imdbIds.map(async (movie) => {
+          const a = await axios.get(
+            `https://www.omdbapi.com/?i=${movie}&apikey=2b377e16`
+          );
+          return { title: a.data.Title, poster: a.data.Poster };
+        })
+      );
+      const defaultMovies = moviesData.res.map((movie, index) => {
+        return {
+          ...movie,
+          title: imdbData[index].title,
+          poster: imdbData[index].poster,
+        };
+      });
+      setSearchList(defaultMovies);
+      console.log(allMovies);
     } catch(error) {
-      console.log("Unknown error")
+      console.log(error)
     }
   };
 
@@ -23,6 +39,7 @@ const Search = () => {
       search();
     }
   };
+
 
 
 

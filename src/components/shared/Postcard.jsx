@@ -9,17 +9,33 @@ import {
 } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
-const Postcard = ({poster, slug, title}) => {
+import { motion } from "framer-motion";
+
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const Postcard = ({ poster, slug, title }) => {
   return (
-    <Link to={`/movie/${slug}`} className="flex flex-col justify-start items-center">
-      <Card className="overflow-hidden sm:w-[200px] shadow-2xl h-full hover:cursor-pointer hover:opacity-80 transition-all">
-        <div className="h-full">
-          <img
-            src={poster}
-            alt=""
-            className="h-full"
-          />
-        </div>
+    <Link
+      to={`/movie/${slug}`}
+    >
+      <Card className="overflow-hidden sm:w-[200px] shadow-2xl h-full hover:cursor-pointer hover:opacity-80 transition-all border-none">
+        <motion.div
+          className="h-full"
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{
+            delay: 0.25,
+            ease: "easeInOut",
+            duration: 0.5,
+          }}
+          viewport={{ amount: 0 }}
+        >
+          <img src={poster} alt="" className="h-full" />
+        </motion.div>
       </Card>
     </Link>
   );
